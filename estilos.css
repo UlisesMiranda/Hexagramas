@@ -1,0 +1,94 @@
+html{
+    font-size: 62.5%;
+    font-family: 'Quicksand', sans-serif;  
+}
+
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.main-container {
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.left-main-container, .right-main-container {
+    width: 90%;
+    justify-content: center;
+    justify-self: center;
+    margin-top: 3rem; 
+}
+
+.inputsNumbers-container{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.input {
+    background-color: #F7F7F7;
+    border: none;
+    border-radius: 0.5rem;
+    height: 2.5rem;
+    font-size: small;
+    padding: 0.6rem;
+}
+
+.buttonsFunctions-container {
+    margin-top: 2.5rem;
+    width: 60%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+}
+
+.buttonsFunctions-container  button{
+    background-color: #ACD9B2;
+    border-radius: 0.8rem;
+    border: none;
+    color: white;
+    width: 100%;
+    height: 5rem;
+    cursor: pointer;
+    font-size: medium;
+}
+
+.descripcionHexagramas-container {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 8rem;
+}
+
+.diagramas-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.hexagramaFigura-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.tabla-container {
+    width: 100%;
+    margin-top: 5rem;
+}
+
+.hexagramas-table {
+    width: 100%;
+    font-size: medium;
+    border: 1px solid black;
+}
+
+td {
+    border: 1px solid black;
+    border-style: dotted;
+}
