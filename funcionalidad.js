@@ -1,5 +1,3 @@
-console.log("hola");
-
 const $primerNumero = document.getElementById("iptPrimerNumero");
 const $segundoNumero = document.getElementById("iptSegundoNumero");
 const $tercerNumero = document.getElementById("iptTercerNumero");
@@ -13,11 +11,27 @@ let countLimiteLineas = 0;
 let coordenadasLineas = [
   {
     x: 25,
-    y: 140,
+    y: 130,
   },
   {
     x: 25,
-    y: 125,
+    y: 110,
+  },
+  {
+    x: 25,
+    y: 90,
+  },
+  {
+    x: 25,
+    y: 70,
+  },
+  {
+    x: 25,
+    y: 50,
+  },
+  {
+    x: 25,
+    y: 30,
   },
 ];
 
@@ -29,22 +43,16 @@ $agregarLinea.addEventListener("click", () => {
   var sumaNumeros =
     parseInt(primerNumero) + parseInt(segundoNumero) + parseInt(tercerNumero);
 
-  console.log(sumaNumeros);
-
   if (sumaNumeros === 6 && countLimiteLineas < 6) {
-    console.log("contador wtf" + countLimiteLineas);
     dibujarYinMutante(coordenadasLineas[countLimiteLineas]);
   }
   if (sumaNumeros === 7 && countLimiteLineas < 6) {
-    console.log("si entro");
     dibujarYang(coordenadasLineas[countLimiteLineas]);
   }
   if (sumaNumeros === 8 && countLimiteLineas < 6) {
-    console.log(countLimiteLineas);
     dibujarYin(coordenadasLineas[countLimiteLineas]);
   }
   if (sumaNumeros === 9 && countLimiteLineas < 6) {
-    console.log(countLimiteLineas);
     dibujarYangMutante(coordenadasLineas[countLimiteLineas]);
   }
 
@@ -64,12 +72,13 @@ function dibujarYinMutante(coordenadasLineas) {
     ctx.lineTo(x + 100, y);
     ctx.stroke();
 
-    ctx.moveTo(x + 110, y);
-    ctx.lineTo(x + 140, y);
+    ctx.moveTo(x + 110, y - 7);
+    ctx.lineTo(x + 140, y + 7);
     ctx.stroke();
 
-    ctx.moveTo(x + 125, y + 7);
-    ctx.lineTo(x + 125, y - 7), ctx.stroke();
+    ctx.moveTo(x + 110, y + 7);
+    ctx.lineTo(x + 140, y - 7);
+    ctx.stroke();
 
     ctx.moveTo(x + 150, y);
     ctx.lineTo(x + 250, y);
@@ -93,5 +102,47 @@ function dibujarYang(coordenadasLineas) {
     ctx.stroke();
 
     ctx.closePath();
+  }
+}
+
+function dibujarYin(coordenadasLineas) {
+  let x = coordenadasLineas.x;
+  let y = coordenadasLineas.y;
+
+  var canvas = document.getElementById("resultDiag1");
+
+  if (canvas.getContext) {
+    var ctx = canvas.getContext("2d");
+
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(x + 100, y);
+    ctx.stroke();
+
+    ctx.moveTo(x + 150, y);
+    ctx.lineTo(x + 250, y);
+    ctx.stroke();
+
+    ctx.closePath();
+  }
+}
+
+function dibujarYangMutante(coordenadasLineas) {
+  let x = coordenadasLineas.x;
+  let y = coordenadasLineas.y;
+
+  var canvas = document.getElementById("resultDiag1");
+  if (canvas.getContext) {
+    var ctx = canvas.getContext("2d");
+
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(x + 250, y);
+    ctx.stroke();
+    ctx.closePath();
+
+    ctx.beginPath();
+    ctx.arc(x + 125, y - 7, 3, 0, 2 * Math.PI);
+    ctx.stroke();
   }
 }
