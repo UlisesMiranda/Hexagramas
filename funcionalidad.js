@@ -4,6 +4,7 @@ const $tercerNumero = document.getElementById("iptTercerNumero");
 const $agregarLinea = document.getElementById("btnAgregarLinea");
 const $borrarLinea = document.getElementById("btnBorrarLinea");
 const $borrarHexagrama = document.getElementById("btnBorrarHexagrama");
+const $agregarLineaAleatoria = document.getElementById("btnNumerosAleatorios");
 const $resultDiag1 = document.getElementById("resultDiag1");
 
 let countLimiteLineas = 0;
@@ -35,29 +36,58 @@ let coordenadasLineas = [
   },
 ];
 
-$agregarLinea.addEventListener("click", () => {
+function agregarLinea(numeroAleatorio) {
   const primerNumero = $primerNumero.value;
   const segundoNumero = $segundoNumero.value;
   const tercerNumero = $tercerNumero.value;
 
-  var sumaNumeros =
-    parseInt(primerNumero) + parseInt(segundoNumero) + parseInt(tercerNumero);
+  let configuracionLineas = [6];
+  let sumaNumeros = 0;
+
+  if (numeroAleatorio) {
+    sumaNumeros = numeroAleatorio;
+  } else {
+    sumaNumeros =
+      parseInt(primerNumero) + parseInt(segundoNumero) + parseInt(tercerNumero);
+  }
 
   if (sumaNumeros === 6 && countLimiteLineas < 6) {
-    dibujarYinMutante(coordenadasLineas[countLimiteLineas]);
+    configuracionLineas[countLimiteLineas] = dibujarYinMutante(
+      coordenadasLineas[countLimiteLineas]
+    );
   }
   if (sumaNumeros === 7 && countLimiteLineas < 6) {
-    dibujarYang(coordenadasLineas[countLimiteLineas]);
+    configuracionLineas[countLimiteLineas] = dibujarYang(
+      coordenadasLineas[countLimiteLineas]
+    );
   }
   if (sumaNumeros === 8 && countLimiteLineas < 6) {
-    dibujarYin(coordenadasLineas[countLimiteLineas]);
+    configuracionLineas[countLimiteLineas] = dibujarYin(
+      coordenadasLineas[countLimiteLineas]
+    );
   }
   if (sumaNumeros === 9 && countLimiteLineas < 6) {
-    dibujarYangMutante(coordenadasLineas[countLimiteLineas]);
+    configuracionLineas[countLimiteLineas] = dibujarYangMutante(
+      coordenadasLineas[countLimiteLineas]
+    );
   }
 
   countLimiteLineas++;
+}
+
+$agregarLineaAleatoria.addEventListener("click", () => {
+  const numeroAleatorio = aleatorio(6, 9);
+
+  agregarLinea(numeroAleatorio);
 });
+
+function aleatorio(inferior, superior) {
+  let numPosibilidades = superior - inferior;
+  let aleatorio = Math.random() * (numPosibilidades + 1);
+  aleatorio = Math.floor(aleatorio);
+
+  return inferior + aleatorio;
+}
 
 function dibujarYinMutante(coordenadasLineas) {
   let x = coordenadasLineas.x;
