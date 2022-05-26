@@ -11,10 +11,10 @@ const $resultDiag1 = document.getElementById("resultDiag1");
 
 let coordenadasLineas = [
     {
-        x : 25, y: 125
+        x : 25, y: 150
     },
     {
-        x : 25, y : 100
+        x : 25, y : 125
     }
 ];
 let countLimiteLineas = 0;
