@@ -1,24 +1,24 @@
 class LineaHexagrama {
-    constructor(nombre, sumaNumeros, $canvas) {
-        this.nombre = nombre;
-        this.sumaNumeros = sumaNumeros;
-        this.idCanvas = $canvas
-    }
+  constructor(nombre, sumaNumeros, $canvas) {
+    this.nombre = nombre;
+    this.sumaNumeros = sumaNumeros;
+    this.idCanvas = $canvas;
+  }
 
-    get TipoLineaHexagrama () {
-        if(this.sumaNumeros == 6) {
-            this.nombre = "Linea yin mutante";
-            let canvas = document.getElementById("idCanvas");
+  get TipoLineaHexagrama() {
+    if (this.sumaNumeros == 6) {
+      this.nombre = "Linea yin mutante";
+      let canvas = document.getElementById("idCanvas");
 
-            if(canvas.getContext)
-        }
+      // if(canvas.getContext)
     }
+  }
 }
 
-function draw () {
-    var canvas = document.getElementById('canvas');
-    if (canvas.getContext) {
-    var ctx = canvas.getContext('2d');
+function draw() {
+  var canvas = document.getElementById("canvas");
+  if (canvas.getContext) {
+    var ctx = canvas.getContext("2d");
 
     // Filled triangle
     ctx.beginPath();
