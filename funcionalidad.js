@@ -8,6 +8,7 @@ const $agregarLineaAleatoria = document.getElementById("btnNumerosAleatorios");
 const $resultDiag1 = document.getElementById("resultDiag1");
 
 let countLimiteLineas = 0;
+let arregloSumaNumeros = [];
 
 let coordenadasLineas = [
   {
@@ -36,7 +37,7 @@ let coordenadasLineas = [
   },
 ];
 
-function agregarLinea(numeroAleatorio) {
+function agregarLinea(numeroExterno, id) {
   const primerNumero = $primerNumero.value;
   const segundoNumero = $segundoNumero.value;
   const tercerNumero = $tercerNumero.value;
@@ -44,56 +45,145 @@ function agregarLinea(numeroAleatorio) {
   let configuracionLineas = [6];
   let sumaNumeros = 0;
 
-  if (numeroAleatorio) {
-    sumaNumeros = numeroAleatorio;
+  if (countLimiteLineas === 6) {
+    alert("Has alcanzado el límite de 6 líneas dentro del hexagrama");
+    arregloSumaNumerosAux = Object.values(arregloSumaNumeros);
+
+    generarNuevoHexagrama(arregloSumaNumeros, 2);
+    nombrarHexagrama(arregloSumaNumeros, 2);
+
+    generarNuevoHexagrama(arregloSumaNumerosAux, 3);
+    nombrarHexagrama(arregloSumaNumerosAux, 3);
   } else {
-    sumaNumeros =
-      parseInt(primerNumero) + parseInt(segundoNumero) + parseInt(tercerNumero);
-  }
+    if (numeroExterno) {
+      sumaNumeros = numeroExterno;
+    } else {
+      sumaNumeros =
+        parseInt(primerNumero) +
+        parseInt(segundoNumero) +
+        parseInt(tercerNumero);
+    }
 
-  if (sumaNumeros === 6 && countLimiteLineas < 6) {
-    configuracionLineas[countLimiteLineas] = dibujarYinMutante(
-      coordenadasLineas[countLimiteLineas]
-    );
-  }
-  if (sumaNumeros === 7 && countLimiteLineas < 6) {
-    configuracionLineas[countLimiteLineas] = dibujarYang(
-      coordenadasLineas[countLimiteLineas]
-    );
-  }
-  if (sumaNumeros === 8 && countLimiteLineas < 6) {
-    configuracionLineas[countLimiteLineas] = dibujarYin(
-      coordenadasLineas[countLimiteLineas]
-    );
-  }
-  if (sumaNumeros === 9 && countLimiteLineas < 6) {
-    configuracionLineas[countLimiteLineas] = dibujarYangMutante(
-      coordenadasLineas[countLimiteLineas]
-    );
-  }
+    arregloSumaNumeros[countLimiteLineas] = sumaNumeros;
 
-  countLimiteLineas++;
+    if (sumaNumeros === 6) {
+      configuracionLineas[countLimiteLineas] = dibujarYinMutante(
+        coordenadasLineas[countLimiteLineas],
+        id
+      );
+    }
+    if (sumaNumeros === 7) {
+      configuracionLineas[countLimiteLineas] = dibujarYang(
+        coordenadasLineas[countLimiteLineas],
+        id
+      );
+    }
+    if (sumaNumeros === 8) {
+      configuracionLineas[countLimiteLineas] = dibujarYin(
+        coordenadasLineas[countLimiteLineas],
+        id
+      );
+    }
+    if (sumaNumeros === 9) {
+      configuracionLineas[countLimiteLineas] = dibujarYangMutante(
+        coordenadasLineas[countLimiteLineas],
+        id
+      );
+    }
+
+    countLimiteLineas++;
+  }
 }
 
 $agregarLineaAleatoria.addEventListener("click", () => {
-  const numeroAleatorio = aleatorio(6, 9);
+  const inferior = 6;
+  const superior = 9;
 
-  agregarLinea(numeroAleatorio);
-});
-
-function aleatorio(inferior, superior) {
   let numPosibilidades = superior - inferior;
   let aleatorio = Math.random() * (numPosibilidades + 1);
   aleatorio = Math.floor(aleatorio);
 
-  return inferior + aleatorio;
+  agregarLinea(inferior + aleatorio, 1);
+});
+
+function generarNuevoHexagrama(arreglo, id) {
+  countLimiteLineas = 0;
+
+  if (id === 2) {
+    arreglo.forEach(function (elemento, indice, arreglo) {
+      if (arreglo[indice] === 6) {
+        arreglo[indice] = 8;
+      } else if (arreglo[indice] === 9) {
+        arreglo[indice] = 7;
+      }
+    });
+    arreglo.forEach((elemento) => agregarLinea(elemento, id));
+  } else if (id === 3) {
+    arreglo.forEach(function (elemento, indice, arreglo) {
+      if (arreglo[indice] === 6) {
+        arreglo[indice] = 7;
+      } else if (arreglo[indice] === 9) {
+        arreglo[indice] = 8;
+      }
+    });
+    arreglo.forEach((elemento) => agregarLinea(elemento, id));
+  }
 }
 
-function dibujarYinMutante(coordenadasLineas) {
+function nombrarHexagrama(arreglo, id) {
+  const tablaHexagramas = [
+    { nombre: "Ch'ien", hexagrama: [7, 7, 7, 7, 7, 7] },
+    { nombre: "K'un", hexagrama: [8, 8, 8, 8, 8, 8] },
+    { nombre: "Chun", hexagrama: [8, 7, 8, 8, 8, 7] },
+    { nombre: "Meng", hexagrama: [7, 8, 8, 8, 7, 8] },
+    { nombre: "Hsü", hexagrama: [8, 7, 8, 7, 7, 7] },
+    { nombre: "Sung", hexagrama: [7, 7, 7, 8, 7, 8] },
+    { nombre: "Shih", hexagrama: [8, 8, 8, 8, 7, 8] },
+    { nombre: "Pi", hexagrama: [8, 7, 8, 8, 8, 8] },
+    { nombre: "Hsiao Ch'u", hexagrama: [7, 7, 8, 7, 7, 7] },
+    { nombre: "Lü", hexagrama: [7, 7, 7, 8, 7, 7] },
+    { nombre: "T'ai", hexagrama: [8, 8, 8, 7, 7, 7] },
+    { nombre: "P'i", hexagrama: [7, 7, 7, 8, 8, 8] },
+    { nombre: "T'sung Jen", hexagrama: [7, 7, 7, 7, 8, 7] },
+    { nombre: "Ta Yu", hexagrama: [7, 8, 7, 7, 7, 7] },
+    { nombre: "Chien", hexagrama: [8, 8, 8, 7, 8, 8] },
+    { nombre: "Yü", hexagrama: [8, 8, 7, 8, 8, 8] },
+    { nombre: "Sui", hexagrama: [8, 7, 7, 8, 8, 7] },
+    { nombre: "Ku", hexagrama: [7, 8, 8, 7, 7, 8] },
+    { nombre: "Lin", hexagrama: [8, 8, 8, 8, 7, 7] },
+    { nombre: "Kuan", hexagrama: [7, 7, 8, 8, 8, 8] },
+    // {nombre: , hexagrama: []},
+    // {nombre: , hexagrama: []},
+    // {nombre: , hexagrama: []},
+    // {nombre: , hexagrama: []},
+    // {nombre: , hexagrama: []},
+    // {nombre: , hexagrama: []},
+    // {nombre: , hexagrama: []},
+    // {nombre: , hexagrama: []},
+    // {nombre: , hexagrama: []},
+    // {nombre: , hexagrama: []},
+    // {nombre: , hexagrama: []},
+    // {nombre: , hexagrama: []},
+    // {nombre: , hexagrama: []},
+    // {nombre: , hexagrama: []},
+  ];
+
+  tablaHexagramas.forEach((elemento) => {
+    if (JSON.stringify(elemento.hexagrama) === arreglo) {
+      const tituloHexagrama = document.getElementById("th" + String(id));
+      let nombreHexagrama = elemento.nombre;
+
+      tituloHexagrama.innerHTML = `
+        <p>${nombreHexagrama}</p>`;
+    }
+  });
+}
+
+function dibujarYinMutante(coordenadasLineas, id) {
   let x = coordenadasLineas.x;
   let y = coordenadasLineas.y;
 
-  var canvas = document.getElementById("resultDiag1");
+  var canvas = document.getElementById("resultDiag" + String(id));
   if (canvas.getContext) {
     var ctx = canvas.getContext("2d");
 
@@ -118,11 +208,11 @@ function dibujarYinMutante(coordenadasLineas) {
   }
 }
 
-function dibujarYang(coordenadasLineas) {
+function dibujarYang(coordenadasLineas, id) {
   let x = coordenadasLineas.x;
   let y = coordenadasLineas.y;
 
-  var canvas = document.getElementById("resultDiag1");
+  var canvas = document.getElementById("resultDiag" + String(id));
   if (canvas.getContext) {
     var ctx = canvas.getContext("2d");
 
@@ -135,11 +225,11 @@ function dibujarYang(coordenadasLineas) {
   }
 }
 
-function dibujarYin(coordenadasLineas) {
+function dibujarYin(coordenadasLineas, id) {
   let x = coordenadasLineas.x;
   let y = coordenadasLineas.y;
 
-  var canvas = document.getElementById("resultDiag1");
+  var canvas = document.getElementById("resultDiag" + String(id));
 
   if (canvas.getContext) {
     var ctx = canvas.getContext("2d");
@@ -157,11 +247,11 @@ function dibujarYin(coordenadasLineas) {
   }
 }
 
-function dibujarYangMutante(coordenadasLineas) {
+function dibujarYangMutante(coordenadasLineas, id) {
   let x = coordenadasLineas.x;
   let y = coordenadasLineas.y;
 
-  var canvas = document.getElementById("resultDiag1");
+  var canvas = document.getElementById("resultDiag" + String(id));
   if (canvas.getContext) {
     var ctx = canvas.getContext("2d");
 
