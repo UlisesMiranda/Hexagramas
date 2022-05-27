@@ -44,16 +44,27 @@ function agregarLinea(numeroExterno, id) {
 
   let configuracionLineas = [6];
   let sumaNumeros = 0;
+  let mutante = false;
 
   if (countLimiteLineas === 6) {
-    alert("Has alcanzado el límite de 6 líneas dentro del hexagrama");
-    arregloSumaNumerosAux = Object.values(arregloSumaNumeros);
+    arregloSumaNumeros.forEach((elemento) => {
+      if (elemento === 6 || elemento === 9) {
+        mutante = true;
+      }
+    });
 
-    generarNuevoHexagrama(arregloSumaNumeros, 2);
-    nombrarHexagrama(arregloSumaNumeros, 2);
+    if (mutante === true) {
+      arregloSumaNumerosAux = Object.values(arregloSumaNumeros);
 
-    generarNuevoHexagrama(arregloSumaNumerosAux, 3);
-    nombrarHexagrama(arregloSumaNumerosAux, 3);
+      generarNuevoHexagrama(arregloSumaNumeros, 2);
+      nombrarHexagrama(arregloSumaNumeros, 2);
+
+      generarNuevoHexagrama(arregloSumaNumerosAux, 3);
+      nombrarHexagrama(arregloSumaNumerosAux, 3);
+    } else {
+      alert("Has alcanzado el límite de 6 líneas dentro del hexagrama");
+      nombrarHexagrama(arregloSumaNumeros, 1);
+    }
   } else {
     if (numeroExterno) {
       sumaNumeros = numeroExterno;
@@ -130,7 +141,7 @@ function generarNuevoHexagrama(arreglo, id) {
   }
 }
 
-function nombrarHexagrama(arreglo, id) {
+function nombrarHexagrama(arregloSumas, id) {
   const tablaHexagramas = [
     { nombre: "Ch'ien", hexagrama: [7, 7, 7, 7, 7, 7] },
     { nombre: "K'un", hexagrama: [8, 8, 8, 8, 8, 8] },
@@ -169,12 +180,10 @@ function nombrarHexagrama(arreglo, id) {
   ];
 
   tablaHexagramas.forEach((elemento) => {
-    if (JSON.stringify(elemento.hexagrama) === arreglo) {
+    if (JSON.stringify(elemento.hexagrama) === JSON.stringify(arregloSumas)) {
       const tituloHexagrama = document.getElementById("th" + String(id));
-      let nombreHexagrama = elemento.nombre;
 
-      tituloHexagrama.innerHTML = `
-        <p>${nombreHexagrama}</p>`;
+      tituloHexagrama.innerHTML = `<p>${elemento.nombre}</p>`;
     }
   });
 }
