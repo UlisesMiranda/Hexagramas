@@ -51,6 +51,10 @@ function agregarLinea(numeroExterno, id) {
   const segundoNumero = $segundoNumero.value;
   const tercerNumero = $tercerNumero.value;
 
+  if(primerNumero == "" || segundoNumero == "" || tercerNumero == "") {
+    alert("Por favor, rellena los campos")
+  }
+
   let configuracionLineas = [6];
   let sumaNumeros = 0;
   let mutante = false;
@@ -111,8 +115,10 @@ function agregarLinea(numeroExterno, id) {
         id
       );
     }
-
-    countLimiteLineas++;
+    if ( sumaNumeros >= 6 && sumaNumeros <= 9 )
+      countLimiteLineas++;
+    else
+      alert("Por favor inserte bien sus numeros, la suma debe ser mayor que 6 y menor que 9")
   }
 }
 
