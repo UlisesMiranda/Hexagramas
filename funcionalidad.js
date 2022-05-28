@@ -356,23 +356,29 @@ function nombrarHexagrama(arreglo, id) {
 
 $primerHexagrama.addEventListener("mouseover", () => {
   const div = document.getElementById("th1");
-  const id = Number(div.children[0].textContent.slice(0, 2));
 
-  descripcion(id);
+  if (div.children[0]) {
+    const id = Number(div.children[0].textContent.slice(0, 2));
+    descripcion(id);
+  }
 });
 
 $segundoHexagrama.addEventListener("mouseover", () => {
   const div = document.getElementById("th2");
-  const id = Number(div.children[0].textContent.slice(0, 2));
 
-  descripcion(id);
+  if (div.children[0]) {
+    const id = Number(div.children[0].textContent.slice(0, 2));
+    descripcion(id);
+  }
 });
 
 $tercerHexagrama.addEventListener("mouseover", () => {
   const div = document.getElementById("th3");
-  const id = Number(div.children[0].textContent.slice(0, 2));
 
-  descripcion(id);
+  if (div.children[0]) {
+    const id = Number(div.children[0].textContent.slice(0, 2));
+    descripcion(id);
+  }
 });
 
 function descripcion(id) {
