@@ -102,3 +102,8 @@ td {
   display: flex;
   flex-direction: column;
 }
+
+.cuadro-resultado {
+  color: #f7f7f7;
+  background-color: darkmagenta;
+}
