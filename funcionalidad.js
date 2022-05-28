@@ -378,8 +378,196 @@ $tercerHexagrama.addEventListener("mouseover", () => {
 function descripcion(id) {
   if (id === 1) {
     $tituloDescripcion.innerHTML = "Cielo";
+    $descripcion.innerHTML = "Lo creativo. El principio generador";
   } else if (id === 2) {
     $tituloDescripcion.innerHTML = "Tierra";
+    $descripcion.innerHTML = "Lo receptivo. El principio pasivo";
+  } else if (id === 3) {
+    $tituloDescripcion.innerHTML = "Acumular";
+    $descripcion.innerHTML = "El obstáculo inicial. La dificultad del comienzo";
+  } else if (id === 4) {
+    $tituloDescripcion.innerHTML = "Juventud";
+    $descripcion.innerHTML = "El joven necio. La inmadurez";
+  } else if (id === 5) {
+    $tituloDescripcion.innerHTML = "Esperar";
+    $descripcion.innerHTML = "La espera. La maduración";
+  } else if (id === 6) {
+    $tituloDescripcion.innerHTML = "Disputar";
+    $descripcion.innerHTML = "El conflicto. El pleito";
+  } else if (id === 7) {
+    $tituloDescripcion.innerHTML = "Ejército";
+    $descripcion.innerHTML = "La legión";
+  } else if (id === 8) {
+    $tituloDescripcion.innerHTML = "Solidaridad";
+    $descripcion.innerHTML = "La unión";
+  } else if (id === 9) {
+    $tituloDescripcion.innerHTML = "Animalito doméstico";
+    $descripcion.innerHTML = "La pequeña fuerza";
+  } else if (id === 10) {
+    $tituloDescripcion.innerHTML = "Caminar";
+    $descripcion.innerHTML = "El porte. El paso cauteloso";
+  } else if (id === 11) {
+    $tituloDescripcion.innerHTML = "Prosperidad";
+    $descripcion.innerHTML = "La paz. La armonía";
+  } else if (id === 12) {
+    $tituloDescripcion.innerHTML = "Cierre";
+    $descripcion.innerHTML = "El estancamiento. Lo inerte";
+  } else if (id === 13) {
+    $tituloDescripcion.innerHTML = "Hombres Reunidos";
+    $descripcion.innerHTML = " La unión comunitaria";
+  } else if (id === 14) {
+    $tituloDescripcion.innerHTML = "Gran dominio";
+    $descripcion.innerHTML = "La gran posesión. Lo que se tiene de más";
+  } else if (id === 15) {
+    $tituloDescripcion.innerHTML = "Condescendencia";
+    $descripcion.innerHTML = "La modestia. La humildad";
+  } else if (id === 16) {
+    $tituloDescripcion.innerHTML = "Ocuparse";
+    $descripcion.innerHTML = "El entusiasmo. La algarabía";
+  } else if (id === 17) {
+    $tituloDescripcion.innerHTML = "Conformarse";
+    $descripcion.innerHTML = "La continuidad. El seguimiento";
+  } else if (id === 18) {
+    $tituloDescripcion.innerHTML = "Destrucción";
+    $descripcion.innerHTML = "La reconstrucción. La labor en lo corrompido";
+  } else if (id === 19) {
+    $tituloDescripcion.innerHTML = "Acercarse";
+    $descripcion.innerHTML = "Lo que va llegando";
+  } else if (id === 20) {
+    $tituloDescripcion.innerHTML = "Observar";
+    $descripcion.innerHTML = "La contemplación";
+  } else if (id === 21) {
+    $tituloDescripcion.innerHTML = "Quebrar mordiendo";
+    $descripcion.innerHTML = "La dentellada. La filosa mordedura";
+  } else if (id === 22) {
+    $tituloDescripcion.innerHTML = "Adornar";
+    $descripcion.innerHTML = "La elegancia. La gracia";
+  } else if (id === 23) {
+    $tituloDescripcion.innerHTML = "Resquebrajar";
+    $descripcion.innerHTML = "La desintegración. El derrumbe";
+  } else if (id === 24) {
+    $tituloDescripcion.innerHTML = "Regresar";
+    $descripcion.innerHTML = "El retorno. Lo que vuelve";
+  } else if (id === 25) {
+    $tituloDescripcion.innerHTML = "Sinceridad";
+    $descripcion.innerHTML = "La inocencia. La naturalidad";
+  } else if (id === 26) {
+    $tituloDescripcion.innerHTML = "Fuerza educadora";
+    $descripcion.innerHTML = "El poder de lo fuerte. La gran acumulación";
+  } else if (id === 27) {
+    $tituloDescripcion.innerHTML = "Nutrirse";
+    $descripcion.innerHTML = "La alimentación. Las fauces";
+  } else if (id === 28) {
+    $tituloDescripcion.innerHTML = "Excesos";
+    $descripcion.innerHTML = "La preponderancia de lo grande";
+  } else if (id === 29) {
+    $tituloDescripcion.innerHTML = "Peligro";
+    $descripcion.innerHTML = "Lo abismal. La caida";
+  } else if (id === 30) {
+    $tituloDescripcion.innerHTML = "Distinguir";
+    $descripcion.innerHTML = "El resplandor. Lo adherente";
+  } else if (id === 31) {
+    $tituloDescripcion.innerHTML = "Unir";
+    $descripcion.innerHTML = "La influencia.La atracción";
+  } else if (id === 32) {
+    $tituloDescripcion.innerHTML = "Luna Creciente";
+    $descripcion.innerHTML = "La duración. La permanencia";
+  } else if (id === 33) {
+    $tituloDescripcion.innerHTML = "Retirarse";
+    $descripcion.innerHTML = "El repliegue";
+  } else if (id === 34) {
+    $tituloDescripcion.innerHTML = "Gran fuerza";
+    $descripcion.innerHTML = "El gran vigor";
+  } else if (id === 35) {
+    $tituloDescripcion.innerHTML = "Progresar";
+    $descripcion.innerHTML = "El avance";
+  } else if (id === 36) {
+    $tituloDescripcion.innerHTML = "Luz que se apaga";
+    $descripcion.innerHTML = "El oscurecimiento";
+  } else if (id === 37) {
+    $tituloDescripcion.innerHTML = "Gente de familia";
+    $descripcion.innerHTML = "El clan";
+  } else if (id === 38) {
+    $tituloDescripcion.innerHTML = "Contraste";
+    $descripcion.innerHTML = "La oposición. El antagonismo";
+  } else if (id === 39) {
+    $tituloDescripcion.innerHTML = "Dificultad";
+    $descripcion.innerHTML = "El obstáculo. El impedimento";
+  } else if (id === 40) {
+    $tituloDescripcion.innerHTML = "Explicar";
+    $descripcion.innerHTML = "La liberación. El alivio";
+  } else if (id === 41) {
+    $tituloDescripcion.innerHTML = "Perder";
+    $descripcion.innerHTML = "La disminución";
+  } else if (id === 42) {
+    $tituloDescripcion.innerHTML = "Evolución";
+    $descripcion.innerHTML = "El aumento. La ganancia";
+  } else if (id === 43) {
+    $tituloDescripcion.innerHTML = "Decidir";
+    $descripcion.innerHTML = "El desbordamiento. La resolución";
+  } else if (id === 44) {
+    $tituloDescripcion.innerHTML = "Encontrarse";
+    $descripcion.innerHTML = "El acoplamiento";
+  } else if (id === 45) {
+    $tituloDescripcion.innerHTML = "Cosechar";
+    $descripcion.innerHTML = "La reunión. La convergencia";
+  } else if (id === 46) {
+    $tituloDescripcion.innerHTML = "Subir";
+    $descripcion.innerHTML = "El ascenso. La escalada";
+  } else if (id === 47) {
+    $tituloDescripcion.innerHTML = "Angustia";
+    $descripcion.innerHTML = "La pesadumbre. El agotamiento";
+  } else if (id === 48) {
+    $tituloDescripcion.innerHTML = "El pozo de agua";
+    $descripcion.innerHTML = "La fuente";
+  } else if (id === 49) {
+    $tituloDescripcion.innerHTML = "Renovar";
+    $descripcion.innerHTML = "La revolución. El cambio";
+  } else if (id === 50) {
+    $tituloDescripcion.innerHTML = "La caldera";
+    $descripcion.innerHTML = "Lo alquímico";
+  } else if (id === 51) {
+    $tituloDescripcion.innerHTML = "Trueno";
+    $descripcion.innerHTML = "La conmoción. Lo suscitativo";
+  } else if (id === 52) {
+    $tituloDescripcion.innerHTML = "Cimientos";
+    $descripcion.innerHTML = "La quietud. La detención";
+  } else if (id === 53) {
+    $tituloDescripcion.innerHTML = "Evolución";
+    $descripcion.innerHTML = "El progreso gradual";
+  } else if (id === 54) {
+    $tituloDescripcion.innerHTML = "Desposar a la hija menor";
+    $descripcion.innerHTML = "La doncella";
+  } else if (id === 55) {
+    $tituloDescripcion.innerHTML = "Abundancia";
+    $descripcion.innerHTML = "La plenitud";
+  } else if (id === 56) {
+    $tituloDescripcion.innerHTML = "Viajero";
+    $descripcion.innerHTML = "El andariego";
+  } else if (id === 57) {
+    $tituloDescripcion.innerHTML = "Viento";
+    $descripcion.innerHTML = "Lo penetrante. Lo suave";
+  } else if (id === 58) {
+    $tituloDescripcion.innerHTML = "Recogerse";
+    $descripcion.innerHTML = "La serenidad. La satisfacción";
+  } else if (id === 59) {
+    $tituloDescripcion.innerHTML = "Confusión";
+    $descripcion.innerHTML = "La dispersión. La disolución";
+  } else if (id === 60) {
+    $tituloDescripcion.innerHTML = "Moderación";
+    $descripcion.innerHTML = "La restricción. La limitación";
+  } else if (id === 61) {
+    $tituloDescripcion.innerHTML = "Fe Interior";
+    $descripcion.innerHTML = "La verdad interior. La sinceridad interna";
+  } else if (id === 62) {
+    $tituloDescripcion.innerHTML = "Pequeñas cosas importantes";
+    $descripcion.innerHTML = "La pequeña preponderancia";
+  } else if (id === 63) {
+    $tituloDescripcion.innerHTML = "Conclusiones";
+    $descripcion.innerHTML = "Después de la realización";
+  } else if (id === 64) {
+    $tituloDescripcion.innerHTML = "Inconcluso";
+    $descripcion.innerHTML = "Antes de la realización";
   }
 }
 
