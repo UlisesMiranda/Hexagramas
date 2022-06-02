@@ -60,6 +60,7 @@ function agregarLinea(numeroExterno, id) {
   let mutante = false;
 
   if (countLimiteLineas === 6) {
+    
     arregloSumaNumeros.forEach((elemento) => {
       if (elemento === 6 || elemento === 9) {
         mutante = true;
@@ -67,6 +68,7 @@ function agregarLinea(numeroExterno, id) {
     });
 
     if (mutante === true) {
+
       arregloSumaNumerosAux = Object.values(arregloSumaNumeros);
 
       generarNuevoHexagrama(arregloSumaNumeros, 2);
@@ -122,6 +124,14 @@ function agregarLinea(numeroExterno, id) {
   }
 }
 
+$borrarLinea.addEventListener("click",() =>{
+  borrarLinea(coordenadasLineas[countLimiteLineas-1],1);
+});
+
+$borrarHexagrama.addEventListener("click",() => {
+  borrarHexagrama(1);
+})
+
 $agregarLineaAleatoria.addEventListener("click", () => {
   const inferior = 6;
   const superior = 9;
@@ -144,6 +154,7 @@ function generarNuevoHexagrama(arreglo, id) {
         arreglo[indice] = 7;
       }
     });
+    console.log(Object.values(arreglo));
     arreglo.forEach((elemento) => agregarLinea(elemento, id));
   } else if (id === 3) {
     arreglo.forEach(function (elemento, indice, arreglo) {
@@ -153,6 +164,7 @@ function generarNuevoHexagrama(arreglo, id) {
         arreglo[indice] = 8;
       }
     });
+    console.log(Object.values(arreglo));
     arreglo.forEach((elemento) => agregarLinea(elemento, id));
   }
 }
@@ -591,87 +603,190 @@ function resaltarCuadro(idCuadroTabla) {
 function dibujarYinMutante(coordenadasLineas, id) {
   let x = coordenadasLineas.x;
   let y = coordenadasLineas.y;
+  let xa = 0,nx = 10,xb=-7,xb2=-7;
 
   var canvas = document.getElementById("resultDiag" + String(id));
   if (canvas.getContext) {
     var ctx = canvas.getContext("2d");
 
-    ctx.beginPath();
-    ctx.moveTo(x, y);
-    ctx.lineTo(x + 100, y);
-    ctx.stroke();
 
-    ctx.moveTo(x + 110, y - 7);
-    ctx.lineTo(x + 140, y + 7);
-    ctx.stroke();
+    var intervalo = setInterval( () => {
+      ctx.beginPath();
+      
+      if(xa<=100){
+        ctx.moveTo(x, y);
+        ctx.lineTo(x + xa, y);
+        ctx.stroke();
+      }
+      
+      if(xa>=110 && xb<=7 && xb2 >=-7){
+        xb+=3.5;
+        xb2+=3.5;
+      }
+      if(xa>=110 && xa <=140){
+        ctx.clearRect(110,y-7,50,14);
+        ctx.moveTo(x + 110, y - 7);
+        ctx.lineTo(x + xa, y + xb);
+        ctx.stroke();
+        
+        ctx.clearRect(110,y-7,50,14);
+        ctx.moveTo(x + 110, y + 7);
+        ctx.lineTo(x + xa, y - xb2);
+        ctx.stroke();
+      }
 
-    ctx.moveTo(x + 110, y + 7);
-    ctx.lineTo(x + 140, y - 7);
-    ctx.stroke();
+      if(xa>=150){
+        ctx.moveTo(x + 150, y);
+        ctx.lineTo(x + xa, y);
+        ctx.stroke();
+      }
+      
+      xa+=nx;
 
-    ctx.moveTo(x + 150, y);
-    ctx.lineTo(x + 250, y);
-    ctx.stroke();
+      ctx.closePath();
 
-    ctx.closePath();
+      if(xa>250){
+        clearInterval(intervalo);
+      }
+    }, 15)
+    
   }
 }
 
 function dibujarYang(coordenadasLineas, id) {
   let x = coordenadasLineas.x;
   let y = coordenadasLineas.y;
+  let xa = 0,nx = 10;
 
   var canvas = document.getElementById("resultDiag" + String(id));
   if (canvas.getContext) {
     var ctx = canvas.getContext("2d");
 
-    ctx.beginPath();
-    ctx.moveTo(x, y);
-    ctx.lineTo(x + 250, y);
-    ctx.stroke();
+    var intervalo = setInterval( () => {
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      ctx.lineTo(x + xa, y);
+      ctx.stroke();
 
-    ctx.closePath();
+      xa+=nx;
+
+      ctx.closePath();
+      if(xa> 250){
+        clearInterval(intervalo);
+      }
+    }, 15)
+    
   }
 }
 
 function dibujarYin(coordenadasLineas, id) {
   let x = coordenadasLineas.x;
   let y = coordenadasLineas.y;
+  let xa = 0,nx = 10;
 
   var canvas = document.getElementById("resultDiag" + String(id));
 
   if (canvas.getContext) {
-    var ctx = canvas.getContext("2d");
+      var ctx = canvas.getContext("2d");
 
-    ctx.beginPath();
-    ctx.moveTo(x, y);
-    ctx.lineTo(x + 100, y);
-    ctx.stroke();
+      var intervalo = setInterval( () => {
+        ctx.beginPath();
+        if(xa<=100){
+          ctx.moveTo(x, y);
+          ctx.lineTo(x + xa, y);
+          ctx.stroke();
+        } else if(xa<=250){
+          ctx.moveTo(x + 150, y);
+          ctx.lineTo(x + xa, y);
+          ctx.stroke();
+        } else if(xa>= 250){
+          clearInterval(intervalo);
+        }
+        if(xa == 100){
+          xa +=40;
+        }
+        xa+=nx;
+        ctx.closePath();
 
-    ctx.moveTo(x + 150, y);
-    ctx.lineTo(x + 250, y);
-    ctx.stroke();
-
-    ctx.closePath();
+      }, 15)  
   }
 }
 
 function dibujarYangMutante(coordenadasLineas, id) {
   let x = coordenadasLineas.x;
   let y = coordenadasLineas.y;
+  let xa = 0,nx = 10, xb = 0,nxb = 0.2;
 
   var canvas = document.getElementById("resultDiag" + String(id));
   if (canvas.getContext) {
     var ctx = canvas.getContext("2d");
 
-    ctx.beginPath();
-    ctx.moveTo(x, y);
-    ctx.lineTo(x + 250, y);
-    ctx.stroke();
-    ctx.closePath();
+    var intervalo = setInterval( () => {
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      ctx.lineTo(x + xa, y);
+      ctx.stroke();
+      ctx.closePath();
 
-    ctx.beginPath();
-    ctx.arc(x + 125, y - 7, 3, 0, 2 * Math.PI);
-    ctx.stroke();
+      if(xa >= 125){
+        if(xb<2){
+          xb+=nxb;
+        }
+        ctx.beginPath();
+        ctx.arc(x + 125, y - 7, 3, 0, xb * Math.PI);
+        ctx.stroke();
+      }
+      
+
+      xa+=nx;
+      if(xa>250){
+        clearInterval(intervalo);
+      }
+     
+    }, 15)
+    
   }
+}
+
+function borrarLinea(coordenadasLineas,id){
+  let x = coordenadasLineas.x;
+  let y = coordenadasLineas.y;
+  var canvas = document.getElementById("resultDiag" + String(id));
+  var canvas2 = document.getElementById("resultDiag2");
+  var canvas3 = document.getElementById("resultDiag3");
+
+  if(canvas.getContext){
+    var ctx = canvas.getContext("2d");
+    ctx.clearRect(x-5,y-10,280,20);
+    countLimiteLineas--;
+  }
+  if(canvas2.getContext){
+    var ctx2 = canvas2.getContext("2d");
+    ctx2.clearRect(x-5,y-10,280,20);
+  }
+  if(canvas3.getContext){
+    var ctx3 = canvas3.getContext("2d");
+    ctx3.clearRect(x-5,y-10,280,20);
+  }
+}
+
+function borrarHexagrama(id){
+  var canvas = document.getElementById("resultDiag" + String(id));
+  var canvas2 = document.getElementById("resultDiag2");
+  var canvas3 = document.getElementById("resultDiag3");
+
+  if(canvas.getContext){
+    var ctx = canvas.getContext("2d");
+    ctx.clearRect(0,0,280,150);
+    countLimiteLineas=0;
+  }
+  if(canvas2.getContext){
+    var ctx2 = canvas2.getContext("2d");
+    ctx2.clearRect(0,0,280,150);
+  }
+  if(canvas3.getContext){
+    var ctx3 = canvas3.getContext("2d");
+    ctx3.clearRect(0,0,280,150);
+  }
+  
 }
