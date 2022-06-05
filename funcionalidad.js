@@ -69,20 +69,20 @@ function agregarLinea(numeroExterno, id) {
       }
     });
 
-    if (mutante === true) {
+    
 
-      arregloSumaNumerosAux = Object.values(arregloSumaNumeros);
+    arregloSumaNumerosAux = Object.values(arregloSumaNumeros);
 
-      generarNuevoHexagrama(arregloSumaNumeros, 2);
-      nombrarHexagrama(arregloSumaNumeros, 2);
-      arreglosIds[0] = idCuadroTabla;
+    generarNuevoHexagrama(arregloSumaNumeros, 2);
+    nombrarHexagrama(arregloSumaNumeros, 2);
+    arreglosIds[0] = idCuadroTabla;
 
-      generarNuevoHexagrama(arregloSumaNumerosAux, 3);
-      nombrarHexagrama(arregloSumaNumerosAux, 3);
-      arreglosIds[1] = idCuadroTabla;
-    } else {
-      nombrarHexagrama(arregloSumaNumeros, 1);
-    }
+    generarNuevoHexagrama(arregloSumaNumerosAux, 3);
+    nombrarHexagrama(arregloSumaNumerosAux, 3);
+    arreglosIds[1] = idCuadroTabla;
+    
+    nombrarHexagrama(arregloSumaNumeros, 1);
+    
 
     alert("Has alcanzado el límite de 6 líneas dentro del hexagrama");
   } else {
@@ -762,6 +762,15 @@ function borrarLinea(coordenadasLineas,id){
   var canvas2 = document.getElementById("resultDiag2");
   var canvas3 = document.getElementById("resultDiag3");
 
+  if(countLimiteLineas === 6){
+    const td = document.getElementById(arreglosIds[0]);
+    td.classList.add("tr2");
+    const td2 = document.getElementById(arreglosIds[1]);
+    td2.classList.add("tr2");
+  
+    arreglosIds = [];
+  }
+
   if(canvas.getContext){
     var ctx = canvas.getContext("2d");
     ctx.clearRect(x-5,y-10,280,20);
@@ -776,12 +785,7 @@ function borrarLinea(coordenadasLineas,id){
     ctx3.clearRect(x-5,y-10,280,20);
   }
 
-  const td = document.getElementById(arreglosIds[0]);
-  td.classList.add("tr2");
-  const td2 = document.getElementById(arreglosIds[1]);
-  td2.classList.add("tr2");
 
-  arreglosIds = [];
 
   tituloHexagrama.innerText="";
   tituloHexagrama2.innerText="";
