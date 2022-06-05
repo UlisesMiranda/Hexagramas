@@ -18,6 +18,8 @@ const $descripcion = document.getElementById("descripcion");
 
 let countLimiteLineas = 0;
 let arregloSumaNumeros = [];
+let idCuadroTabla = "";
+let arreglosIds = [];
 
 let coordenadasLineas = [
   {
@@ -73,9 +75,11 @@ function agregarLinea(numeroExterno, id) {
 
       generarNuevoHexagrama(arregloSumaNumeros, 2);
       nombrarHexagrama(arregloSumaNumeros, 2);
+      arreglosIds[0] = idCuadroTabla;
 
       generarNuevoHexagrama(arregloSumaNumerosAux, 3);
       nombrarHexagrama(arregloSumaNumerosAux, 3);
+      arreglosIds[1] = idCuadroTabla;
     } else {
       nombrarHexagrama(arregloSumaNumeros, 1);
     }
@@ -172,7 +176,7 @@ function generarNuevoHexagrama(arreglo, id) {
 function nombrarHexagrama(arreglo, id) {
   const tituloHexagrama = document.getElementById("th" + String(id));
   let nombre = "";
-  let idCuadroTabla = "";
+
 
   if (JSON.stringify(arreglo) === JSON.stringify([7, 7, 7, 7, 7, 7])) {
     nombre = "1 . Ch'en";
@@ -597,7 +601,7 @@ function descripcion(id) {
 
 function resaltarCuadro(idCuadroTabla) {
   const td = document.getElementById(idCuadroTabla);
-  td.classList.add("cuadro-resultado");
+  td.classList.add("tr1");
 }
 
 function dibujarYinMutante(coordenadasLineas, id) {
@@ -751,6 +755,9 @@ function dibujarYangMutante(coordenadasLineas, id) {
 function borrarLinea(coordenadasLineas,id){
   let x = coordenadasLineas.x;
   let y = coordenadasLineas.y;
+  const tituloHexagrama = document.getElementById("th1");
+  const tituloHexagrama2 = document.getElementById("th2");
+  const tituloHexagrama3 = document.getElementById("th3");
   var canvas = document.getElementById("resultDiag" + String(id));
   var canvas2 = document.getElementById("resultDiag2");
   var canvas3 = document.getElementById("resultDiag3");
@@ -768,9 +775,25 @@ function borrarLinea(coordenadasLineas,id){
     var ctx3 = canvas3.getContext("2d");
     ctx3.clearRect(x-5,y-10,280,20);
   }
+
+  const td = document.getElementById(arreglosIds[0]);
+  td.classList.add("tr2");
+  const td2 = document.getElementById(arreglosIds[1]);
+  td2.classList.add("tr2");
+
+  arreglosIds = [];
+
+  tituloHexagrama.innerText="";
+  tituloHexagrama2.innerText="";
+  tituloHexagrama3.innerText="";
+  $tituloDescripcion.innerHTML="";
+  $descripcion.innerHTML="";
 }
 
 function borrarHexagrama(id){
+  const tituloHexagrama = document.getElementById("th1");
+  const tituloHexagrama2 = document.getElementById("th2");
+  const tituloHexagrama3 = document.getElementById("th3");
   var canvas = document.getElementById("resultDiag" + String(id));
   var canvas2 = document.getElementById("resultDiag2");
   var canvas3 = document.getElementById("resultDiag3");
@@ -788,5 +811,17 @@ function borrarHexagrama(id){
     var ctx3 = canvas3.getContext("2d");
     ctx3.clearRect(0,0,280,150);
   }
+
+  const td = document.getElementById(arreglosIds[0]);
+  td.classList.add("tr2");
+  const td2 = document.getElementById(arreglosIds[1]);
+  td2.classList.add("tr2");
+
+  arreglosIds = [];
   
+  tituloHexagrama.innerText="";
+  tituloHexagrama2.innerText="";
+  tituloHexagrama3.innerText="";
+  $tituloDescripcion.innerHTML="";
+  $descripcion.innerHTML="";
 }

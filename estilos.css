@@ -107,3 +107,39 @@ td {
   color: #f7f7f7;
   background-color: darkmagenta;
 }
+
+.tr1 {
+  color: #f7f7f7;
+  background-color: darkmagenta;
+  display: table-row;
+  animation: slide-down 1s ease-out;
+}
+
+@keyframes slide-down {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-100%);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+  }
+}
+
+.tr2 {
+  color: #000000;
+  background-color: white;
+  display: table-row;
+  animation: slide-up 1s ease-out;
+}
+
+@keyframes slide-up {
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(0%);
+  }
+  0% {
+    opacity: 1;
+    -webkit-transform: translateY(-100%);
+  }
+}
