@@ -613,6 +613,7 @@ function dibujarYinMutante(coordenadasLineas, id) {
   if (canvas.getContext) {
     var ctx = canvas.getContext("2d");
 
+    ctx.strokeStyle = "white";
 
     var intervalo = setInterval( () => {
       ctx.beginPath();
@@ -666,6 +667,8 @@ function dibujarYang(coordenadasLineas, id) {
   if (canvas.getContext) {
     var ctx = canvas.getContext("2d");
 
+    ctx.strokeStyle = "white";
+
     var intervalo = setInterval( () => {
       ctx.beginPath();
       ctx.moveTo(x, y);
@@ -692,6 +695,8 @@ function dibujarYin(coordenadasLineas, id) {
 
   if (canvas.getContext) {
       var ctx = canvas.getContext("2d");
+
+      ctx.strokeStyle = "white";
 
       var intervalo = setInterval( () => {
         ctx.beginPath();
@@ -724,6 +729,8 @@ function dibujarYangMutante(coordenadasLineas, id) {
   var canvas = document.getElementById("resultDiag" + String(id));
   if (canvas.getContext) {
     var ctx = canvas.getContext("2d");
+
+    ctx.strokeStyle = "white";
 
     var intervalo = setInterval( () => {
       ctx.beginPath();
