@@ -20,6 +20,7 @@ let countLimiteLineas = 0;
 let arregloSumaNumeros = [];
 let idCuadroTabla = "";
 let arreglosIds = [];
+let bandera = true;
 
 let coordenadasLineas = [
   {
@@ -53,8 +54,8 @@ function agregarLinea(numeroExterno, id) {
   const segundoNumero = $segundoNumero.value;
   const tercerNumero = $tercerNumero.value;
 
-  if(primerNumero == "" || segundoNumero == "" || tercerNumero == "") {
-    alert("Por favor, rellena los campos")
+  if (primerNumero == "" || segundoNumero == "" || tercerNumero == "") {
+    alert("Por favor, rellena los campos");
   }
 
   let configuracionLineas = [6];
@@ -62,27 +63,28 @@ function agregarLinea(numeroExterno, id) {
   let mutante = false;
 
   if (countLimiteLineas === 6) {
-    
     arregloSumaNumeros.forEach((elemento) => {
       if (elemento === 6 || elemento === 9) {
         mutante = true;
       }
     });
 
-    
+    if (mutante === true) {
+      arregloSumaNumerosAux = Object.values(arregloSumaNumeros);
 
-    arregloSumaNumerosAux = Object.values(arregloSumaNumeros);
+      generarNuevoHexagrama(arregloSumaNumeros, 2);
+      nombrarHexagrama(arregloSumaNumeros, 2);
+      arreglosIds[0] = idCuadroTabla;
 
-    generarNuevoHexagrama(arregloSumaNumeros, 2);
-    nombrarHexagrama(arregloSumaNumeros, 2);
-    arreglosIds[0] = idCuadroTabla;
-
-    generarNuevoHexagrama(arregloSumaNumerosAux, 3);
-    nombrarHexagrama(arregloSumaNumerosAux, 3);
-    arreglosIds[1] = idCuadroTabla;
-    
-    nombrarHexagrama(arregloSumaNumeros, 1);
-    
+      generarNuevoHexagrama(arregloSumaNumerosAux, 3);
+      nombrarHexagrama(arregloSumaNumerosAux, 3);
+      arreglosIds[1] = idCuadroTabla;
+      bandera = true;
+    } else {
+      nombrarHexagrama(arregloSumaNumeros, 1);
+      arreglosIds[0] = idCuadroTabla;
+      bandera = false;
+    }
 
     alert("Has alcanzado el límite de 6 líneas dentro del hexagrama");
   } else {
@@ -121,20 +123,21 @@ function agregarLinea(numeroExterno, id) {
         id
       );
     }
-    if ( sumaNumeros >= 6 && sumaNumeros <= 9 )
-      countLimiteLineas++;
+    if (sumaNumeros >= 6 && sumaNumeros <= 9) countLimiteLineas++;
     else
-      alert("Por favor inserte bien sus numeros, la suma debe ser mayor que 6 y menor que 9")
+      alert(
+        "Por favor inserte bien sus numeros, la suma debe ser mayor o igual que 6 y menor o igual que 9"
+      );
   }
 }
 
-$borrarLinea.addEventListener("click",() =>{
-  borrarLinea(coordenadasLineas[countLimiteLineas-1],1);
+$borrarLinea.addEventListener("click", () => {
+  borrarLinea(coordenadasLineas[countLimiteLineas - 1], 1);
 });
 
-$borrarHexagrama.addEventListener("click",() => {
+$borrarHexagrama.addEventListener("click", () => {
   borrarHexagrama(1);
-})
+});
 
 $agregarLineaAleatoria.addEventListener("click", () => {
   const inferior = 6;
@@ -176,7 +179,6 @@ function generarNuevoHexagrama(arreglo, id) {
 function nombrarHexagrama(arreglo, id) {
   const tituloHexagrama = document.getElementById("th" + String(id));
   let nombre = "";
-
 
   if (JSON.stringify(arreglo) === JSON.stringify([7, 7, 7, 7, 7, 7])) {
     nombre = "1 . Ch'en";
@@ -607,7 +609,10 @@ function resaltarCuadro(idCuadroTabla) {
 function dibujarYinMutante(coordenadasLineas, id) {
   let x = coordenadasLineas.x;
   let y = coordenadasLineas.y;
-  let xa = 0,nx = 10,xb=-7,xb2=-7;
+  let xa = 0,
+    nx = 10,
+    xb = -7,
+    xb2 = -7;
 
   var canvas = document.getElementById("resultDiag" + String(id));
   if (canvas.getContext) {
@@ -615,53 +620,53 @@ function dibujarYinMutante(coordenadasLineas, id) {
 
     ctx.strokeStyle = "white";
 
-    var intervalo = setInterval( () => {
+    var intervalo = setInterval(() => {
       ctx.beginPath();
-      
-      if(xa<=100){
+
+      if (xa <= 100) {
         ctx.moveTo(x, y);
         ctx.lineTo(x + xa, y);
         ctx.stroke();
       }
-      
-      if(xa>=110 && xb<=7 && xb2 >=-7){
-        xb+=3.5;
-        xb2+=3.5;
+
+      if (xa >= 110 && xb <= 7 && xb2 >= -7) {
+        xb += 3.5;
+        xb2 += 3.5;
       }
-      if(xa>=110 && xa <=140){
-        ctx.clearRect(110,y-7,50,14);
+      if (xa >= 110 && xa <= 140) {
+        ctx.clearRect(110, y - 7, 50, 14);
         ctx.moveTo(x + 110, y - 7);
         ctx.lineTo(x + xa, y + xb);
         ctx.stroke();
-        
-        ctx.clearRect(110,y-7,50,14);
+
+        ctx.clearRect(110, y - 7, 50, 14);
         ctx.moveTo(x + 110, y + 7);
         ctx.lineTo(x + xa, y - xb2);
         ctx.stroke();
       }
 
-      if(xa>=150){
+      if (xa >= 150) {
         ctx.moveTo(x + 150, y);
         ctx.lineTo(x + xa, y);
         ctx.stroke();
       }
-      
-      xa+=nx;
+
+      xa += nx;
 
       ctx.closePath();
 
-      if(xa>250){
+      if (xa > 250) {
         clearInterval(intervalo);
       }
-    }, 15)
-    
+    }, 15);
   }
 }
 
 function dibujarYang(coordenadasLineas, id) {
   let x = coordenadasLineas.x;
   let y = coordenadasLineas.y;
-  let xa = 0,nx = 10;
+  let xa = 0,
+    nx = 10;
 
   var canvas = document.getElementById("resultDiag" + String(id));
   if (canvas.getContext) {
@@ -669,62 +674,64 @@ function dibujarYang(coordenadasLineas, id) {
 
     ctx.strokeStyle = "white";
 
-    var intervalo = setInterval( () => {
+    var intervalo = setInterval(() => {
       ctx.beginPath();
       ctx.moveTo(x, y);
       ctx.lineTo(x + xa, y);
       ctx.stroke();
 
-      xa+=nx;
+      xa += nx;
 
       ctx.closePath();
-      if(xa> 250){
+      if (xa > 250) {
         clearInterval(intervalo);
       }
-    }, 15)
-    
+    }, 15);
   }
 }
 
 function dibujarYin(coordenadasLineas, id) {
   let x = coordenadasLineas.x;
   let y = coordenadasLineas.y;
-  let xa = 0,nx = 10;
+  let xa = 0,
+    nx = 10;
 
   var canvas = document.getElementById("resultDiag" + String(id));
 
   if (canvas.getContext) {
-      var ctx = canvas.getContext("2d");
+    var ctx = canvas.getContext("2d");
 
-      ctx.strokeStyle = "white";
+    ctx.strokeStyle = "white";
 
-      var intervalo = setInterval( () => {
-        ctx.beginPath();
-        if(xa<=100){
-          ctx.moveTo(x, y);
-          ctx.lineTo(x + xa, y);
-          ctx.stroke();
-        } else if(xa<=250){
-          ctx.moveTo(x + 150, y);
-          ctx.lineTo(x + xa, y);
-          ctx.stroke();
-        } else if(xa>= 250){
-          clearInterval(intervalo);
-        }
-        if(xa == 100){
-          xa +=40;
-        }
-        xa+=nx;
-        ctx.closePath();
-
-      }, 15)  
+    var intervalo = setInterval(() => {
+      ctx.beginPath();
+      if (xa <= 100) {
+        ctx.moveTo(x, y);
+        ctx.lineTo(x + xa, y);
+        ctx.stroke();
+      } else if (xa <= 250) {
+        ctx.moveTo(x + 150, y);
+        ctx.lineTo(x + xa, y);
+        ctx.stroke();
+      } else if (xa >= 250) {
+        clearInterval(intervalo);
+      }
+      if (xa == 100) {
+        xa += 40;
+      }
+      xa += nx;
+      ctx.closePath();
+    }, 15);
   }
 }
 
 function dibujarYangMutante(coordenadasLineas, id) {
   let x = coordenadasLineas.x;
   let y = coordenadasLineas.y;
-  let xa = 0,nx = 10, xb = 0,nxb = 0.2;
+  let xa = 0,
+    nx = 10,
+    xb = 0,
+    nxb = 0.2;
 
   var canvas = document.getElementById("resultDiag" + String(id));
   if (canvas.getContext) {
@@ -732,34 +739,31 @@ function dibujarYangMutante(coordenadasLineas, id) {
 
     ctx.strokeStyle = "white";
 
-    var intervalo = setInterval( () => {
+    var intervalo = setInterval(() => {
       ctx.beginPath();
       ctx.moveTo(x, y);
       ctx.lineTo(x + xa, y);
       ctx.stroke();
       ctx.closePath();
 
-      if(xa >= 125){
-        if(xb<2){
-          xb+=nxb;
+      if (xa >= 125) {
+        if (xb < 2) {
+          xb += nxb;
         }
         ctx.beginPath();
         ctx.arc(x + 125, y - 7, 3, 0, xb * Math.PI);
         ctx.stroke();
       }
-      
 
-      xa+=nx;
-      if(xa>250){
+      xa += nx;
+      if (xa > 250) {
         clearInterval(intervalo);
       }
-     
-    }, 15)
-    
+    }, 15);
   }
 }
 
-function borrarLinea(coordenadasLineas,id){
+function borrarLinea(coordenadasLineas, id) {
   let x = coordenadasLineas.x;
   let y = coordenadasLineas.y;
   const tituloHexagrama = document.getElementById("th1");
@@ -769,39 +773,41 @@ function borrarLinea(coordenadasLineas,id){
   var canvas2 = document.getElementById("resultDiag2");
   var canvas3 = document.getElementById("resultDiag3");
 
-  if(countLimiteLineas === 6){
+  if (countLimiteLineas === 6 && bandera === true) {
     const td = document.getElementById(arreglosIds[0]);
     td.classList.add("tr2");
+
     const td2 = document.getElementById(arreglosIds[1]);
     td2.classList.add("tr2");
-  
+
     arreglosIds = [];
+  } else if (countLimiteLineas === 6 && bandera === false) {
+    const td = document.getElementById(arreglosIds[0]);
+    td.classList.add("tr2");
   }
 
-  if(canvas.getContext){
+  if (canvas.getContext) {
     var ctx = canvas.getContext("2d");
-    ctx.clearRect(x-5,y-10,280,20);
+    ctx.clearRect(x - 5, y - 10, 280, 20);
     countLimiteLineas--;
   }
-  if(canvas2.getContext){
+  if (canvas2.getContext) {
     var ctx2 = canvas2.getContext("2d");
-    ctx2.clearRect(x-5,y-10,280,20);
+    ctx2.clearRect(x - 5, y - 10, 280, 20);
   }
-  if(canvas3.getContext){
+  if (canvas3.getContext) {
     var ctx3 = canvas3.getContext("2d");
-    ctx3.clearRect(x-5,y-10,280,20);
+    ctx3.clearRect(x - 5, y - 10, 280, 20);
   }
 
-
-
-  tituloHexagrama.innerText="";
-  tituloHexagrama2.innerText="";
-  tituloHexagrama3.innerText="";
-  $tituloDescripcion.innerHTML="";
-  $descripcion.innerHTML="";
+  tituloHexagrama.innerText = "";
+  tituloHexagrama2.innerText = "";
+  tituloHexagrama3.innerText = "";
+  $tituloDescripcion.innerHTML = "";
+  $descripcion.innerHTML = "";
 }
 
-function borrarHexagrama(id){
+function borrarHexagrama(id) {
   const tituloHexagrama = document.getElementById("th1");
   const tituloHexagrama2 = document.getElementById("th2");
   const tituloHexagrama3 = document.getElementById("th3");
@@ -809,18 +815,18 @@ function borrarHexagrama(id){
   var canvas2 = document.getElementById("resultDiag2");
   var canvas3 = document.getElementById("resultDiag3");
 
-  if(canvas.getContext){
+  if (canvas.getContext) {
     var ctx = canvas.getContext("2d");
-    ctx.clearRect(0,0,280,150);
-    countLimiteLineas=0;
+    ctx.clearRect(0, 0, 280, 150);
+    countLimiteLineas = 0;
   }
-  if(canvas2.getContext){
+  if (canvas2.getContext) {
     var ctx2 = canvas2.getContext("2d");
-    ctx2.clearRect(0,0,280,150);
+    ctx2.clearRect(0, 0, 280, 150);
   }
-  if(canvas3.getContext){
+  if (canvas3.getContext) {
     var ctx3 = canvas3.getContext("2d");
-    ctx3.clearRect(0,0,280,150);
+    ctx3.clearRect(0, 0, 280, 150);
   }
 
   const td = document.getElementById(arreglosIds[0]);
@@ -829,10 +835,10 @@ function borrarHexagrama(id){
   td2.classList.add("tr2");
 
   arreglosIds = [];
-  
-  tituloHexagrama.innerText="";
-  tituloHexagrama2.innerText="";
-  tituloHexagrama3.innerText="";
-  $tituloDescripcion.innerHTML="";
-  $descripcion.innerHTML="";
+
+  tituloHexagrama.innerText = "";
+  tituloHexagrama2.innerText = "";
+  tituloHexagrama3.innerText = "";
+  $tituloDescripcion.innerHTML = "";
+  $descripcion.innerHTML = "";
 }
