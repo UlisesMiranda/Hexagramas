@@ -603,6 +603,7 @@ function descripcion(id) {
 
 function resaltarCuadro(idCuadroTabla) {
   const td = document.getElementById(idCuadroTabla);
+  td.classList.remove("tr2");
   td.classList.add("tr1");
 }
 
@@ -805,6 +806,13 @@ function borrarLinea(coordenadasLineas, id) {
   tituloHexagrama3.innerText = "";
   $tituloDescripcion.innerHTML = "";
   $descripcion.innerHTML = "";
+
+  const td = document.getElementById(arreglosIds[0]);
+  td.classList.remove("tr1");
+  td.classList.add("tr2");
+  const td2 = document.getElementById(arreglosIds[1]);
+  td2.classList.remove("tr1");
+  td2.classList.add("tr2");
 }
 
 function borrarHexagrama(id) {
